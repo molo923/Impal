@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 11 Agu 2019 pada 11.43
--- Versi server: 10.3.15-MariaDB
--- Versi PHP: 7.3.6
+-- Generation Time: Aug 12, 2019 at 09:15 AM
+-- Server version: 10.3.16-MariaDB
+-- PHP Version: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -24,14 +24,14 @@ SET time_zone = "+00:00";
 
 DELIMITER $$
 --
--- Prosedur
+-- Procedures
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `u` ()  BEGIN
 SELECT * FROM banksampah;
 END$$
 
 --
--- Fungsi
+-- Functions
 --
 CREATE DEFINER=`root`@`localhost` FUNCTION `a` (`phar` INT) RETURNS VARCHAR(30) CHARSET latin1 BEGIN
 DECLARE surp varchar(30);
@@ -47,7 +47,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `arus_sampah`
+-- Table structure for table `arus_sampah`
 --
 
 CREATE TABLE `arus_sampah` (
@@ -60,7 +60,7 @@ CREATE TABLE `arus_sampah` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `arus_sampah`
+-- Dumping data for table `arus_sampah`
 --
 
 INSERT INTO `arus_sampah` (`tgl_transaksi`, `id_setoran`, `id_sampahkeluar`, `id_kategorisampah`, `ds`, `ks`) VALUES
@@ -69,7 +69,7 @@ INSERT INTO `arus_sampah` (`tgl_transaksi`, `id_setoran`, `id_sampahkeluar`, `id
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `banksampah`
+-- Table structure for table `banksampah`
 --
 
 CREATE TABLE `banksampah` (
@@ -88,7 +88,7 @@ CREATE TABLE `banksampah` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `banksampah`
+-- Dumping data for table `banksampah`
 --
 
 INSERT INTO `banksampah` (`id_banksampah`, `id_induk`, `nomor_wallet`, `username`, `password`, `nama_banksampah`, `nohp_banksampah`, `email_banksampah`, `alamat_banksampah`, `longitude`, `latitude`, `status_banksampah`) VALUES
@@ -104,7 +104,7 @@ INSERT INTO `banksampah` (`id_banksampah`, `id_induk`, `nomor_wallet`, `username
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `driver`
+-- Table structure for table `driver`
 --
 
 CREATE TABLE `driver` (
@@ -120,7 +120,7 @@ CREATE TABLE `driver` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `driver`
+-- Dumping data for table `driver`
 --
 
 INSERT INTO `driver` (`id_driver`, `username_driver`, `password_driver`, `nama_driver`, `nohp_driver`, `jk_driver`, `alamat_driver`, `id_banksampah`, `status_driver`) VALUES
@@ -129,7 +129,7 @@ INSERT INTO `driver` (`id_driver`, `username_driver`, `password_driver`, `nama_d
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `goniwallet`
+-- Table structure for table `goniwallet`
 --
 
 CREATE TABLE `goniwallet` (
@@ -139,7 +139,7 @@ CREATE TABLE `goniwallet` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `goniwallet`
+-- Dumping data for table `goniwallet`
 --
 
 INSERT INTO `goniwallet` (`nomor_wallet`, `saldo`, `limit_wallet`) VALUES
@@ -156,7 +156,7 @@ INSERT INTO `goniwallet` (`nomor_wallet`, `saldo`, `limit_wallet`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `histori_sampah`
+-- Table structure for table `histori_sampah`
 --
 
 CREATE TABLE `histori_sampah` (
@@ -175,7 +175,7 @@ CREATE TABLE `histori_sampah` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `histori_sampah`
+-- Dumping data for table `histori_sampah`
 --
 
 INSERT INTO `histori_sampah` (`tanggal_histori`, `id_kategorisampah`, `id_banksampah`, `qbeli`, `qhibah`, `qlainnya`, `qresidu`, `qmutasian`, `qdimutasi`, `qjual`, `qnonjual`, `qreject`) VALUES
@@ -241,7 +241,7 @@ INSERT INTO `histori_sampah` (`tanggal_histori`, `id_kategorisampah`, `id_banksa
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jemput_langganan`
+-- Table structure for table `jemput_langganan`
 --
 
 CREATE TABLE `jemput_langganan` (
@@ -250,10 +250,17 @@ CREATE TABLE `jemput_langganan` (
   `hari` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `jemput_langganan`
+--
+
+INSERT INTO `jemput_langganan` (`id_jemputl`, `minggu`, `hari`) VALUES
+('JL-00001', '1;3', '3');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jemput_sekali`
+-- Table structure for table `jemput_sekali`
 --
 
 CREATE TABLE `jemput_sekali` (
@@ -261,14 +268,21 @@ CREATE TABLE `jemput_sekali` (
   `id_setoran` varchar(20) NOT NULL,
   `tanggal_jemputs` date NOT NULL,
   `perkiraan_jemputs` float(8,2) NOT NULL,
-  `long_jemputs` float(8,2) NOT NULL,
-  `lat_jemputs` float(8,2) NOT NULL
+  `long_jemputs` float(8,2) DEFAULT NULL,
+  `lat_jemputs` float(8,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jemput_sekali`
+--
+
+INSERT INTO `jemput_sekali` (`id_jemputs`, `id_setoran`, `tanggal_jemputs`, `perkiraan_jemputs`, `long_jemputs`, `lat_jemputs`) VALUES
+('JS-00001', 'S-00516', '2019-08-13', 100.00, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `join_akun`
+-- Table structure for table `join_akun`
 --
 
 CREATE TABLE `join_akun` (
@@ -281,7 +295,7 @@ CREATE TABLE `join_akun` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `join_akun`
+-- Dumping data for table `join_akun`
 --
 
 INSERT INTO `join_akun` (`id_joins`, `id_banksampah`, `id_nasabah`, `tanggal_join`, `tanggal_out`, `status_join`) VALUES
@@ -300,7 +314,7 @@ INSERT INTO `join_akun` (`id_joins`, `id_banksampah`, `id_nasabah`, `tanggal_joi
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategorisampah`
+-- Table structure for table `kategorisampah`
 --
 
 CREATE TABLE `kategorisampah` (
@@ -327,7 +341,7 @@ CREATE TABLE `kategorisampah` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `kategorisampah`
+-- Dumping data for table `kategorisampah`
 --
 
 INSERT INTO `kategorisampah` (`id_kategorisampah`, `kode_kat`, `id_banksampah`, `golongan`, `jenis`, `harga`, `harga_rek`, `harga_atas`, `harga_bawah`, `qbeli`, `qhibah`, `qlainnya`, `qresidu`, `qmutasian`, `qdimutasi`, `qjual`, `qnonjual`, `qreject`, `deskripsi_kat`, `status_kat`) VALUES
@@ -365,7 +379,7 @@ INSERT INTO `kategorisampah` (`id_kategorisampah`, `kode_kat`, `id_banksampah`, 
 (45, 'p0060', 33, 'anorganik', 'PET', 15000.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 'Warna biru ', 'nonaktif');
 
 --
--- Trigger `kategorisampah`
+-- Triggers `kategorisampah`
 --
 DELIMITER $$
 CREATE TRIGGER `r` AFTER UPDATE ON `kategorisampah` FOR EACH ROW BEGIN
@@ -377,7 +391,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kodetransaksi`
+-- Table structure for table `kodetransaksi`
 --
 
 CREATE TABLE `kodetransaksi` (
@@ -389,7 +403,7 @@ CREATE TABLE `kodetransaksi` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `nasabah`
+-- Table structure for table `nasabah`
 --
 
 CREATE TABLE `nasabah` (
@@ -408,7 +422,7 @@ CREATE TABLE `nasabah` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `nasabah`
+-- Dumping data for table `nasabah`
 --
 
 INSERT INTO `nasabah` (`id_nasabah`, `nomorn_wallet`, `username`, `password`, `nama_nasabah`, `jenis_kelamin`, `nohp_nasabah`, `email_nasabah`, `alamat_nasabah`, `longitude`, `latitude`, `status_nasabah`) VALUES
@@ -427,7 +441,7 @@ INSERT INTO `nasabah` (`id_nasabah`, `nomorn_wallet`, `username`, `password`, `n
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sampahkeluar`
+-- Table structure for table `sampahkeluar`
 --
 
 CREATE TABLE `sampahkeluar` (
@@ -446,7 +460,7 @@ CREATE TABLE `sampahkeluar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `sampahkeluar`
+-- Dumping data for table `sampahkeluar`
 --
 
 INSERT INTO `sampahkeluar` (`id_sampahkeluar`, `id_banksampah`, `tgl_sampahkeluar`, `tgl_done`, `jenis_sampahkeluar`, `berat_sampahkeluar`, `tujuan_sampahkeluar`, `tberat_reject`, `total_harga_sampahkeluar`, `biaya_sampahkeluar`, `status_sampahkeluar`, `keterangan_sampahkeluar`) VALUES
@@ -518,7 +532,7 @@ INSERT INTO `sampahkeluar` (`id_sampahkeluar`, `id_banksampah`, `tgl_sampahkelua
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sampahkeluar_detail`
+-- Table structure for table `sampahkeluar_detail`
 --
 
 CREATE TABLE `sampahkeluar_detail` (
@@ -532,7 +546,7 @@ CREATE TABLE `sampahkeluar_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `sampahkeluar_detail`
+-- Dumping data for table `sampahkeluar_detail`
 --
 
 INSERT INTO `sampahkeluar_detail` (`id_sampahkeluar`, `id_kategorisampah`, `berat`, `berat_reject`, `harga_kg`, `sub_harga`, `status_terima`) VALUES
@@ -629,7 +643,7 @@ INSERT INTO `sampahkeluar_detail` (`id_sampahkeluar`, `id_kategorisampah`, `bera
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sampah_masuk`
+-- Table structure for table `sampah_masuk`
 --
 
 CREATE TABLE `sampah_masuk` (
@@ -652,7 +666,7 @@ CREATE TABLE `sampah_masuk` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sampah_mutasi`
+-- Table structure for table `sampah_mutasi`
 --
 
 CREATE TABLE `sampah_mutasi` (
@@ -666,7 +680,7 @@ CREATE TABLE `sampah_mutasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `sampah_mutasi`
+-- Dumping data for table `sampah_mutasi`
 --
 
 INSERT INTO `sampah_mutasi` (`id_mutasi`, `kode_mutasi`, `id_banksampah`, `tgl_mutasi`, `idkatsam_mutasi`, `idkatsam_dimutasi`, `berat_kg`) VALUES
@@ -687,7 +701,7 @@ INSERT INTO `sampah_mutasi` (`id_mutasi`, `kode_mutasi`, `id_banksampah`, `tgl_m
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sampah_residu`
+-- Table structure for table `sampah_residu`
 --
 
 CREATE TABLE `sampah_residu` (
@@ -700,7 +714,7 @@ CREATE TABLE `sampah_residu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `sampah_residu`
+-- Dumping data for table `sampah_residu`
 --
 
 INSERT INTO `sampah_residu` (`id_residu`, `kode_residu`, `id_banksampah`, `tgl_residu`, `id_kategorisampah`, `berat_residu`) VALUES
@@ -719,7 +733,7 @@ INSERT INTO `sampah_residu` (`id_residu`, `kode_residu`, `id_banksampah`, `tgl_r
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `setoran`
+-- Table structure for table `setoran`
 --
 
 CREATE TABLE `setoran` (
@@ -739,7 +753,7 @@ CREATE TABLE `setoran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `setoran`
+-- Dumping data for table `setoran`
 --
 
 INSERT INTO `setoran` (`id_setoran`, `jenis_setoran`, `id_banksampah`, `id_nasabah`, `total_berat`, `totalb_reject`, `totalb_residu`, `total_harga`, `tgl_setorin`, `tgl_setordone`, `biaya_setoran`, `status_setoran`, `keterangan_setoran`) VALUES
@@ -835,6 +849,7 @@ INSERT INTO `setoran` (`id_setoran`, `jenis_setoran`, `id_banksampah`, `id_nasab
 ('S-85514', 'hibah', 33, NULL, 10.00, 0.00, 0.00, 0.00, '2019-07-10', '2019-05-01', 0.00, 'selesai', 'HJO'),
 ('S-86816', 'hibah', 12, NULL, 700.00, 0.00, 0.00, 0.00, '2019-05-12', '2019-05-12', 0.00, 'selesai', ''),
 ('S-87919', 'beli', 31, 29, 600.00, 0.00, 0.00, 759800.00, '2019-07-04', '2019-07-04', 200.00, 'selesai', 'Pak Le'),
+('S-91338', 'beli', 33, 30, 100.00, 0.00, 0.00, 99000.00, '2019-08-13', '0000-00-00', 1000.00, 'diproses', 'Buset'),
 ('S-91431', 'lainnya', 33, NULL, 10.00, 0.00, 0.00, 0.00, '2019-07-12', '2019-07-12', 0.00, 'selesai', 'hhhhhh'),
 ('S-93757', 'lainnya', 12, NULL, 97.00, 0.00, 3.00, 0.00, '2019-05-12', '2019-05-12', 0.00, 'selesai', 'retur'),
 ('S-94323', 'beli', 30, NULL, 10.00, 0.00, 0.00, 1440.00, '2019-07-02', '2019-07-02', 2.00, 'selesai', 'hhhhhh'),
@@ -850,7 +865,7 @@ INSERT INTO `setoran` (`id_setoran`, `jenis_setoran`, `id_banksampah`, `id_nasab
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `setoran_detail`
+-- Table structure for table `setoran_detail`
 --
 
 CREATE TABLE `setoran_detail` (
@@ -864,7 +879,7 @@ CREATE TABLE `setoran_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `setoran_detail`
+-- Dumping data for table `setoran_detail`
 --
 
 INSERT INTO `setoran_detail` (`id_setoran`, `id_kategorisampah`, `berat`, `beratsetoran_reject`, `berat_residu`, `sub_harga`, `status_sampah`) VALUES
@@ -1001,12 +1016,13 @@ INSERT INTO `setoran_detail` (`id_setoran`, `id_kategorisampah`, `berat`, `berat
 ('S-03805', 33, 1000.00, 0.00, 0.00, 0.00, 'selesai'),
 ('S-55379', 35, 10.00, 0.00, 0.00, 1000.00, 'selesai'),
 ('S-09464', 33, 1000.00, 0.00, 0.00, 1000000.00, 'selesai'),
-('S-50120', 33, 4000.00, 0.00, 0.00, 1000000.00, 'selesai');
+('S-50120', 33, 4000.00, 0.00, 0.00, 1000000.00, 'selesai'),
+('S-91338', 33, 100.00, 0.00, 0.00, 100000.00, 'belum selesai');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `setoran_detailj`
+-- Table structure for table `setoran_detailj`
 --
 
 CREATE TABLE `setoran_detailj` (
@@ -1023,7 +1039,7 @@ CREATE TABLE `setoran_detailj` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `setoran_jemput`
+-- Table structure for table `setoran_jemput`
 --
 
 CREATE TABLE `setoran_jemput` (
@@ -1048,21 +1064,29 @@ CREATE TABLE `setoran_jemput` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `set_lang`
+-- Table structure for table `setoran_langganan`
 --
 
-CREATE TABLE `set_lang` (
+CREATE TABLE `setoran_langganan` (
   `id_jemputl` varchar(20) NOT NULL,
   `id_setoran` varchar(20) NOT NULL,
   `perkiraan` float(8,2) NOT NULL,
+  `hari_res` int(11) DEFAULT NULL,
   `long_jemputl` float(8,2) NOT NULL,
   `lat_jemputl` float(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `setoran_langganan`
+--
+
+INSERT INTO `setoran_langganan` (`id_jemputl`, `id_setoran`, `perkiraan`, `hari_res`, `long_jemputl`, `lat_jemputl`) VALUES
+('JL-00001', 'S-91338', 150.00, NULL, 0.00, 0.00);
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transaksikeluar`
+-- Table structure for table `transaksikeluar`
 --
 
 CREATE TABLE `transaksikeluar` (
@@ -1079,7 +1103,7 @@ CREATE TABLE `transaksikeluar` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transaksimasuk`
+-- Table structure for table `transaksimasuk`
 --
 
 CREATE TABLE `transaksimasuk` (
@@ -1096,7 +1120,7 @@ CREATE TABLE `transaksimasuk` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `trgr`
+-- Table structure for table `trgr`
 --
 
 CREATE TABLE `trgr` (
@@ -1112,7 +1136,7 @@ CREATE TABLE `trgr` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `trgr`
+-- Dumping data for table `trgr`
 --
 
 INSERT INTO `trgr` (`id_kategorisampah`, `id_banksampah`, `golongan`, `jenis`, `haga`, `harga_atas`, `harga_bawah`, `deskripsi_kat`, `tgl`) VALUES
@@ -1533,7 +1557,7 @@ INSERT INTO `trgr` (`id_kategorisampah`, `id_banksampah`, `golongan`, `jenis`, `
 --
 
 --
--- Indeks untuk tabel `arus_sampah`
+-- Indexes for table `arus_sampah`
 --
 ALTER TABLE `arus_sampah`
   ADD KEY `arus_sampah_ibfk_1` (`id_kategorisampah`),
@@ -1541,7 +1565,7 @@ ALTER TABLE `arus_sampah`
   ADD KEY `id_setoran` (`id_setoran`);
 
 --
--- Indeks untuk tabel `banksampah`
+-- Indexes for table `banksampah`
 --
 ALTER TABLE `banksampah`
   ADD PRIMARY KEY (`id_banksampah`),
@@ -1551,40 +1575,40 @@ ALTER TABLE `banksampah`
   ADD KEY `banksampah_ibfk_3` (`id_induk`);
 
 --
--- Indeks untuk tabel `driver`
+-- Indexes for table `driver`
 --
 ALTER TABLE `driver`
   ADD PRIMARY KEY (`id_driver`),
   ADD KEY `id_banksampah` (`id_banksampah`);
 
 --
--- Indeks untuk tabel `goniwallet`
+-- Indexes for table `goniwallet`
 --
 ALTER TABLE `goniwallet`
   ADD PRIMARY KEY (`nomor_wallet`);
 
 --
--- Indeks untuk tabel `histori_sampah`
+-- Indexes for table `histori_sampah`
 --
 ALTER TABLE `histori_sampah`
   ADD KEY `histori_sampah_ibfk_1` (`id_banksampah`),
   ADD KEY `id_kategorisampah` (`id_kategorisampah`);
 
 --
--- Indeks untuk tabel `jemput_langganan`
+-- Indexes for table `jemput_langganan`
 --
 ALTER TABLE `jemput_langganan`
   ADD PRIMARY KEY (`id_jemputl`);
 
 --
--- Indeks untuk tabel `jemput_sekali`
+-- Indexes for table `jemput_sekali`
 --
 ALTER TABLE `jemput_sekali`
   ADD PRIMARY KEY (`id_jemputs`),
   ADD KEY `id_setoran` (`id_setoran`);
 
 --
--- Indeks untuk tabel `join_akun`
+-- Indexes for table `join_akun`
 --
 ALTER TABLE `join_akun`
   ADD PRIMARY KEY (`id_joins`),
@@ -1592,20 +1616,20 @@ ALTER TABLE `join_akun`
   ADD KEY `id_nasabah` (`id_nasabah`);
 
 --
--- Indeks untuk tabel `kategorisampah`
+-- Indexes for table `kategorisampah`
 --
 ALTER TABLE `kategorisampah`
   ADD PRIMARY KEY (`id_kategorisampah`),
   ADD KEY `id_banksampah` (`id_banksampah`);
 
 --
--- Indeks untuk tabel `kodetransaksi`
+-- Indexes for table `kodetransaksi`
 --
 ALTER TABLE `kodetransaksi`
   ADD PRIMARY KEY (`kode_transaksi`);
 
 --
--- Indeks untuk tabel `nasabah`
+-- Indexes for table `nasabah`
 --
 ALTER TABLE `nasabah`
   ADD PRIMARY KEY (`id_nasabah`),
@@ -1613,21 +1637,21 @@ ALTER TABLE `nasabah`
   ADD KEY `nomorn_wallet` (`nomorn_wallet`);
 
 --
--- Indeks untuk tabel `sampahkeluar`
+-- Indexes for table `sampahkeluar`
 --
 ALTER TABLE `sampahkeluar`
   ADD PRIMARY KEY (`id_sampahkeluar`),
   ADD KEY `id_banksampah` (`id_banksampah`);
 
 --
--- Indeks untuk tabel `sampahkeluar_detail`
+-- Indexes for table `sampahkeluar_detail`
 --
 ALTER TABLE `sampahkeluar_detail`
   ADD KEY `id_sampahkeluar` (`id_sampahkeluar`),
   ADD KEY `id_kategorisampah` (`id_kategorisampah`);
 
 --
--- Indeks untuk tabel `sampah_mutasi`
+-- Indexes for table `sampah_mutasi`
 --
 ALTER TABLE `sampah_mutasi`
   ADD PRIMARY KEY (`id_mutasi`),
@@ -1636,7 +1660,7 @@ ALTER TABLE `sampah_mutasi`
   ADD KEY `sampah_mutasi_ibfk_2` (`idkatsam_dimutasi`);
 
 --
--- Indeks untuk tabel `sampah_residu`
+-- Indexes for table `sampah_residu`
 --
 ALTER TABLE `sampah_residu`
   ADD PRIMARY KEY (`id_residu`),
@@ -1644,7 +1668,7 @@ ALTER TABLE `sampah_residu`
   ADD KEY `id_kategorisampah` (`id_kategorisampah`);
 
 --
--- Indeks untuk tabel `setoran`
+-- Indexes for table `setoran`
 --
 ALTER TABLE `setoran`
   ADD PRIMARY KEY (`id_setoran`),
@@ -1652,21 +1676,21 @@ ALTER TABLE `setoran`
   ADD KEY `id_nasabah` (`id_nasabah`);
 
 --
--- Indeks untuk tabel `setoran_detail`
+-- Indexes for table `setoran_detail`
 --
 ALTER TABLE `setoran_detail`
   ADD KEY `id_setoran` (`id_setoran`),
   ADD KEY `id_kategorisampah` (`id_kategorisampah`);
 
 --
--- Indeks untuk tabel `setoran_detailj`
+-- Indexes for table `setoran_detailj`
 --
 ALTER TABLE `setoran_detailj`
   ADD KEY `id_setoranj` (`id_setoranj`),
   ADD KEY `id_kategorisampah` (`id_kategorisampah`);
 
 --
--- Indeks untuk tabel `setoran_jemput`
+-- Indexes for table `setoran_jemput`
 --
 ALTER TABLE `setoran_jemput`
   ADD PRIMARY KEY (`id_setoranj`),
@@ -1674,14 +1698,14 @@ ALTER TABLE `setoran_jemput`
   ADD KEY `id_nasabah` (`id_nasabah`);
 
 --
--- Indeks untuk tabel `set_lang`
+-- Indexes for table `setoran_langganan`
 --
-ALTER TABLE `set_lang`
+ALTER TABLE `setoran_langganan`
   ADD KEY `set_lang_ibfk_1` (`id_jemputl`),
   ADD KEY `id_setoran` (`id_setoran`);
 
 --
--- Indeks untuk tabel `transaksikeluar`
+-- Indexes for table `transaksikeluar`
 --
 ALTER TABLE `transaksikeluar`
   ADD PRIMARY KEY (`id_transaksikeluar`),
@@ -1689,7 +1713,7 @@ ALTER TABLE `transaksikeluar`
   ADD KEY `kode_transaksi` (`kode_transaksi`);
 
 --
--- Indeks untuk tabel `transaksimasuk`
+-- Indexes for table `transaksimasuk`
 --
 ALTER TABLE `transaksimasuk`
   ADD PRIMARY KEY (`id_transaksimasuk`),
@@ -1697,57 +1721,57 @@ ALTER TABLE `transaksimasuk`
   ADD KEY `kode_transaksi` (`kode_transaksi`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `banksampah`
+-- AUTO_INCREMENT for table `banksampah`
 --
 ALTER TABLE `banksampah`
   MODIFY `id_banksampah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
--- AUTO_INCREMENT untuk tabel `driver`
+-- AUTO_INCREMENT for table `driver`
 --
 ALTER TABLE `driver`
   MODIFY `id_driver` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `join_akun`
+-- AUTO_INCREMENT for table `join_akun`
 --
 ALTER TABLE `join_akun`
   MODIFY `id_joins` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT untuk tabel `kategorisampah`
+-- AUTO_INCREMENT for table `kategorisampah`
 --
 ALTER TABLE `kategorisampah`
   MODIFY `id_kategorisampah` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
--- AUTO_INCREMENT untuk tabel `nasabah`
+-- AUTO_INCREMENT for table `nasabah`
 --
 ALTER TABLE `nasabah`
   MODIFY `id_nasabah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
--- AUTO_INCREMENT untuk tabel `sampah_mutasi`
+-- AUTO_INCREMENT for table `sampah_mutasi`
 --
 ALTER TABLE `sampah_mutasi`
   MODIFY `id_mutasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
--- AUTO_INCREMENT untuk tabel `sampah_residu`
+-- AUTO_INCREMENT for table `sampah_residu`
 --
 ALTER TABLE `sampah_residu`
   MODIFY `id_residu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `arus_sampah`
+-- Constraints for table `arus_sampah`
 --
 ALTER TABLE `arus_sampah`
   ADD CONSTRAINT `arus_sampah_ibfk_1` FOREIGN KEY (`id_kategorisampah`) REFERENCES `kategorisampah` (`id_kategorisampah`) ON DELETE NO ACTION,
@@ -1755,65 +1779,65 @@ ALTER TABLE `arus_sampah`
   ADD CONSTRAINT `arus_sampah_ibfk_3` FOREIGN KEY (`id_setoran`) REFERENCES `setoran` (`id_setoran`);
 
 --
--- Ketidakleluasaan untuk tabel `banksampah`
+-- Constraints for table `banksampah`
 --
 ALTER TABLE `banksampah`
   ADD CONSTRAINT `banksampah_ibfk_2` FOREIGN KEY (`nomor_wallet`) REFERENCES `goniwallet` (`nomor_wallet`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `banksampah_ibfk_3` FOREIGN KEY (`id_induk`) REFERENCES `banksampah` (`id_banksampah`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `driver`
+-- Constraints for table `driver`
 --
 ALTER TABLE `driver`
   ADD CONSTRAINT `driver_ibfk_1` FOREIGN KEY (`id_banksampah`) REFERENCES `banksampah` (`id_banksampah`);
 
 --
--- Ketidakleluasaan untuk tabel `histori_sampah`
+-- Constraints for table `histori_sampah`
 --
 ALTER TABLE `histori_sampah`
   ADD CONSTRAINT `histori_sampah_ibfk_1` FOREIGN KEY (`id_banksampah`) REFERENCES `banksampah` (`id_banksampah`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `histori_sampah_ibfk_2` FOREIGN KEY (`id_kategorisampah`) REFERENCES `kategorisampah` (`id_kategorisampah`);
 
 --
--- Ketidakleluasaan untuk tabel `jemput_sekali`
+-- Constraints for table `jemput_sekali`
 --
 ALTER TABLE `jemput_sekali`
   ADD CONSTRAINT `jemput_sekali_ibfk_1` FOREIGN KEY (`id_setoran`) REFERENCES `setoran` (`id_setoran`);
 
 --
--- Ketidakleluasaan untuk tabel `join_akun`
+-- Constraints for table `join_akun`
 --
 ALTER TABLE `join_akun`
   ADD CONSTRAINT `join_akun_ibfk_1` FOREIGN KEY (`id_banksampah`) REFERENCES `banksampah` (`id_banksampah`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `join_akun_ibfk_2` FOREIGN KEY (`id_nasabah`) REFERENCES `nasabah` (`id_nasabah`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `kategorisampah`
+-- Constraints for table `kategorisampah`
 --
 ALTER TABLE `kategorisampah`
   ADD CONSTRAINT `kategorisampah_ibfk_1` FOREIGN KEY (`id_banksampah`) REFERENCES `banksampah` (`id_banksampah`);
 
 --
--- Ketidakleluasaan untuk tabel `nasabah`
+-- Constraints for table `nasabah`
 --
 ALTER TABLE `nasabah`
   ADD CONSTRAINT `nasabah_ibfk_1` FOREIGN KEY (`nomorn_wallet`) REFERENCES `goniwallet` (`nomor_wallet`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `sampahkeluar`
+-- Constraints for table `sampahkeluar`
 --
 ALTER TABLE `sampahkeluar`
   ADD CONSTRAINT `sampahkeluar_ibfk_1` FOREIGN KEY (`id_banksampah`) REFERENCES `banksampah` (`id_banksampah`);
 
 --
--- Ketidakleluasaan untuk tabel `sampahkeluar_detail`
+-- Constraints for table `sampahkeluar_detail`
 --
 ALTER TABLE `sampahkeluar_detail`
   ADD CONSTRAINT `sampahkeluar_detail_ibfk_1` FOREIGN KEY (`id_sampahkeluar`) REFERENCES `sampahkeluar` (`id_sampahkeluar`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `sampahkeluar_detail_ibfk_2` FOREIGN KEY (`id_kategorisampah`) REFERENCES `kategorisampah` (`id_kategorisampah`);
 
 --
--- Ketidakleluasaan untuk tabel `sampah_mutasi`
+-- Constraints for table `sampah_mutasi`
 --
 ALTER TABLE `sampah_mutasi`
   ADD CONSTRAINT `sampah_mutasi_ibfk_1` FOREIGN KEY (`id_banksampah`) REFERENCES `banksampah` (`id_banksampah`) ON DELETE NO ACTION,
@@ -1821,56 +1845,56 @@ ALTER TABLE `sampah_mutasi`
   ADD CONSTRAINT `sampah_mutasi_ibfk_3` FOREIGN KEY (`idkatsam_mutasi`) REFERENCES `kategorisampah` (`id_kategorisampah`);
 
 --
--- Ketidakleluasaan untuk tabel `sampah_residu`
+-- Constraints for table `sampah_residu`
 --
 ALTER TABLE `sampah_residu`
   ADD CONSTRAINT `sampah_residu_ibfk_1` FOREIGN KEY (`id_banksampah`) REFERENCES `banksampah` (`id_banksampah`) ON DELETE CASCADE,
   ADD CONSTRAINT `sampah_residu_ibfk_2` FOREIGN KEY (`id_kategorisampah`) REFERENCES `kategorisampah` (`id_kategorisampah`);
 
 --
--- Ketidakleluasaan untuk tabel `setoran`
+-- Constraints for table `setoran`
 --
 ALTER TABLE `setoran`
   ADD CONSTRAINT `setoran_ibfk_1` FOREIGN KEY (`id_banksampah`) REFERENCES `banksampah` (`id_banksampah`),
   ADD CONSTRAINT `setoran_ibfk_2` FOREIGN KEY (`id_nasabah`) REFERENCES `nasabah` (`id_nasabah`);
 
 --
--- Ketidakleluasaan untuk tabel `setoran_detail`
+-- Constraints for table `setoran_detail`
 --
 ALTER TABLE `setoran_detail`
   ADD CONSTRAINT `setoran_detail_ibfk_1` FOREIGN KEY (`id_setoran`) REFERENCES `setoran` (`id_setoran`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `setoran_detail_ibfk_2` FOREIGN KEY (`id_kategorisampah`) REFERENCES `kategorisampah` (`id_kategorisampah`);
 
 --
--- Ketidakleluasaan untuk tabel `setoran_detailj`
+-- Constraints for table `setoran_detailj`
 --
 ALTER TABLE `setoran_detailj`
   ADD CONSTRAINT `setoran_detailj_ibfk_1` FOREIGN KEY (`id_setoranj`) REFERENCES `setoran_jemput` (`id_setoranj`),
   ADD CONSTRAINT `setoran_detailj_ibfk_2` FOREIGN KEY (`id_kategorisampah`) REFERENCES `kategorisampah` (`id_kategorisampah`);
 
 --
--- Ketidakleluasaan untuk tabel `setoran_jemput`
+-- Constraints for table `setoran_jemput`
 --
 ALTER TABLE `setoran_jemput`
   ADD CONSTRAINT `setoran_jemput_ibfk_1` FOREIGN KEY (`id_banksampah`) REFERENCES `banksampah` (`id_banksampah`),
   ADD CONSTRAINT `setoran_jemput_ibfk_2` FOREIGN KEY (`id_nasabah`) REFERENCES `nasabah` (`id_nasabah`);
 
 --
--- Ketidakleluasaan untuk tabel `set_lang`
+-- Constraints for table `setoran_langganan`
 --
-ALTER TABLE `set_lang`
-  ADD CONSTRAINT `set_lang_ibfk_1` FOREIGN KEY (`id_jemputl`) REFERENCES `jemput_langganan` (`id_jemputl`) ON DELETE CASCADE,
-  ADD CONSTRAINT `set_lang_ibfk_2` FOREIGN KEY (`id_setoran`) REFERENCES `setoran` (`id_setoran`);
+ALTER TABLE `setoran_langganan`
+  ADD CONSTRAINT `setoran_langganan_ibfk_1` FOREIGN KEY (`id_jemputl`) REFERENCES `jemput_langganan` (`id_jemputl`) ON DELETE CASCADE,
+  ADD CONSTRAINT `setoran_langganan_ibfk_2` FOREIGN KEY (`id_setoran`) REFERENCES `setoran` (`id_setoran`);
 
 --
--- Ketidakleluasaan untuk tabel `transaksikeluar`
+-- Constraints for table `transaksikeluar`
 --
 ALTER TABLE `transaksikeluar`
   ADD CONSTRAINT `transaksikeluar_ibfk_1` FOREIGN KEY (`nomor_wallet`) REFERENCES `goniwallet` (`nomor_wallet`),
   ADD CONSTRAINT `transaksikeluar_ibfk_2` FOREIGN KEY (`kode_transaksi`) REFERENCES `kodetransaksi` (`kode_transaksi`);
 
 --
--- Ketidakleluasaan untuk tabel `transaksimasuk`
+-- Constraints for table `transaksimasuk`
 --
 ALTER TABLE `transaksimasuk`
   ADD CONSTRAINT `transaksimasuk_ibfk_1` FOREIGN KEY (`nomor_wallet`) REFERENCES `goniwallet` (`nomor_wallet`),
@@ -1878,15 +1902,15 @@ ALTER TABLE `transaksimasuk`
 
 DELIMITER $$
 --
--- Event
+-- Events
 --
-CREATE DEFINER=`root`@`localhost` EVENT `histori_test` ON SCHEDULE EVERY 1 MINUTE STARTS '2019-07-11 09:40:03' ON COMPLETION NOT PRESERVE DISABLE DO INSERT INTO histori_sampah 
-SELECT CURRENT_DATE - INTERVAL 2 MONTH, kategorisampah.id_kategorisampah, kategorisampah.id_banksampah,kategorisampah.qbeli,
+CREATE DEFINER=`root`@`localhost` EVENT `histori` ON SCHEDULE EVERY 1 MONTH STARTS '2019-07-11 09:39:34' ON COMPLETION NOT PRESERVE ENABLE DO INSERT INTO histori_sampah 
+SELECT CURRENT_DATE - INTERVAL 1 MONTH, kategorisampah.id_kategorisampah, kategorisampah.id_banksampah,kategorisampah.qbeli,
 kategorisampah.qhibah, kategorisampah.qlainnya,kategorisampah.qresidu,kategorisampah.qmutasian,kategorisampah.qdimutasi,
 kategorisampah.qjual,kategorisampah.qnonjual,kategorisampah.qreject FROM kategorisampah$$
 
-CREATE DEFINER=`root`@`localhost` EVENT `histori` ON SCHEDULE EVERY 1 MONTH STARTS '2019-07-11 09:39:34' ON COMPLETION NOT PRESERVE ENABLE DO INSERT INTO histori_sampah 
-SELECT CURRENT_DATE - INTERVAL 1 MONTH, kategorisampah.id_kategorisampah, kategorisampah.id_banksampah,kategorisampah.qbeli,
+CREATE DEFINER=`root`@`localhost` EVENT `histori_test` ON SCHEDULE EVERY 1 MINUTE STARTS '2019-07-11 09:40:03' ON COMPLETION NOT PRESERVE DISABLE DO INSERT INTO histori_sampah 
+SELECT CURRENT_DATE - INTERVAL 2 MONTH, kategorisampah.id_kategorisampah, kategorisampah.id_banksampah,kategorisampah.qbeli,
 kategorisampah.qhibah, kategorisampah.qlainnya,kategorisampah.qresidu,kategorisampah.qmutasian,kategorisampah.qdimutasi,
 kategorisampah.qjual,kategorisampah.qnonjual,kategorisampah.qreject FROM kategorisampah$$
 

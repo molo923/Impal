@@ -1,0 +1,2 @@
+1. buat database dulu dengan nama "gogon"
+2. import file gogon.sql ke database tersebut

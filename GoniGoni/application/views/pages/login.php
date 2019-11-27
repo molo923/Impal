@@ -57,7 +57,7 @@
                     <span class="pull-left"><a href="#" class="flip-link btn btn-info" id="to-recover">Lost password?</a></span>
 
 
-                    <span class="pull-right"><input type="submit" name="login" class="btn btn-success"></span>
+                    <span class="pull-right"><input type="submit" name="login" class="btn btn-success" value="Login"></span>
                     <span class="pull-right"><a type="submit" href="<?php echo base_url()?>C_User/regisform" class="btn btn-warning" /> Registrasi</a></span>
 
                 </div>
@@ -73,7 +73,7 @@
                
                 <div class="form-actions">
                     <span class="pull-left"><a href="#" class="flip-link btn btn-success" id="to-login">&laquo; Back to login</a></span>
-                    <span class="pull-right"><a class="btn btn-info"/>Reecover</a></span>
+                    <span class="pull-right"><a class="btn btn-info"/>Recover</a></span>
                 </div>
             </form>
         </div>
